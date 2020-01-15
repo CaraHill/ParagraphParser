@@ -84,13 +84,13 @@ RSpec.describe ParagraphParser do
     context 'when the paragraph has sentences with many of the above in it' do
       let(:paragraph) do
         <<~PGH
-          Cupcake ipsum dolor sit amet! "Soufflé liquorice pastry pie croissant soufflé jelly." Halvah croissant gummi bears... Jelly beans cake liquorice apple pie? Lemon drops fruitcake pudding@example.com tootsie roll sesame snaps sweet. Chocolate cake jujubes gummi bears dragée jelly cupcake jelly cookie?? Ice cream cupcake donut jelly!!
+          Cupcake ipsum dolor sit amet! "Soufflé liquorice pastry pie croissant soufflé jelly.", she said. Halvah croissant gummi bears... Jelly beans cake liquorice apple pie? Lemon drops fruitcake pudding@example.com tootsie roll sesame snaps sweet. Chocolate cake jujubes gummi bears dragée jelly cupcake jelly cookie?? Ice cream cupcake donut jelly!!
         PGH
       end
 
       it 'finds the correct sentences' do
         expect(parser.sentences[0]).to eq 'Cupcake ipsum dolor sit amet!'
-        expect(parser.sentences[1]).to eq '"Soufflé liquorice pastry pie croissant soufflé jelly."'
+        expect(parser.sentences[1]).to eq '"Soufflé liquorice pastry pie croissant soufflé jelly.", she said.'
         expect(parser.sentences[2]).to eq 'Halvah croissant gummi bears...'
         expect(parser.sentences[3]).to eq 'Jelly beans cake liquorice apple pie?'
         expect(parser.sentences[4]).to eq 'Lemon drops fruitcake pudding@example.com tootsie roll sesame snaps sweet.'
