@@ -24,7 +24,7 @@ class ParagraphParser
   end
 
   def find_end_of_sentence(array)
-    array.find_index('.')
+    array.find_index { |char| /[\.\?\!]/ =~ char }
   end
 
   def get_sentence(array, next_index)
@@ -35,7 +35,7 @@ class ParagraphParser
     new_index = index
 
     until end_of_sentence?(array[new_index])
-      new_index = array[new_index..-1].find_index('.') + new_index
+      new_index = array[new_index..-1].find_index { |char| /[\.\"\?\!]/ =~ char } + new_index
       new_index += 1
     end
 
