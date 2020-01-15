@@ -15,7 +15,7 @@ class ParagraphParser
   private
 
   def find_sentence(array)
-    index = array.find_index { |char| /[\.\?\!]/ =~ char }
+    index = array.index { |char| /[\.\?\!]/ =~ char }
     next_index = index + 1
     next_char = array[next_index]
     return get_sentence(array, next_index) if end_of_sentence?(next_char)
@@ -32,13 +32,17 @@ class ParagraphParser
   end
 
   def get_difficult_sentence(array, index)
-    new_index = index
-
-    until end_of_sentence?(array[new_index])
-      new_index = array[new_index..-1].find_index { |char| /[\.\"\?\!]/ =~ char } + new_index
-      new_index += 1
-    end
+    new_index = find_end_of_sentence(array, index)
 
     get_sentence(array, new_index)
+  end
+
+  def find_end_of_sentence(array, index)
+    until end_of_sentence?(array[index])
+      index = array[index..-1].index { |char| /[\.\"\?\!]/ =~ char } + index
+      index += 1
+    end
+
+    index
   end
 end
