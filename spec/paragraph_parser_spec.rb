@@ -12,13 +12,13 @@ RSpec.describe ParagraphParser do
 
   let(:parser) { ParagraphParser.new(paragraph) }
 
-  describe '#find_sentences' do
+  describe '#sentences' do
     it 'should return an array' do
-      expect(parser.find_sentences).to be_an_instance_of(Array)
+      expect(parser.sentences).to be_an_instance_of(Array)
     end
 
     it 'when joined, should equal the original paragraph' do
-      expect(parser.find_sentences.join(' ')).to eq paragraph.strip
+      expect(parser.sentences.join(' ')).to eq paragraph.strip
     end
 
     context 'when there is a sentence with an email address in it' do
@@ -29,7 +29,7 @@ RSpec.describe ParagraphParser do
       end
 
       it 'finds the correct sentence including the email address' do
-        expect(parser.find_sentences[1]).to eq 'Soufflé liquorice pastry pie croissant soufflé info@example.com jelly.'
+        expect(parser.sentences[1]).to eq 'Soufflé liquorice pastry pie croissant soufflé info@example.com jelly.'
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe ParagraphParser do
       end
 
       it 'finds the correct sentence including the elipsis' do
-        expect(parser.find_sentences[1]).to eq 'Soufflé liquorice pastry pie croissant soufflé jelly...'
+        expect(parser.sentences[1]).to eq 'Soufflé liquorice pastry pie croissant soufflé jelly...'
       end
     end
 
@@ -53,7 +53,7 @@ RSpec.describe ParagraphParser do
       end
 
       it 'finds the correct sentence including the question mark' do
-        expect(parser.find_sentences[1]).to eq 'Soufflé liquorice pastry pie croissant soufflé jelly?'
+        expect(parser.sentences[1]).to eq 'Soufflé liquorice pastry pie croissant soufflé jelly?'
       end
     end
 
@@ -65,7 +65,7 @@ RSpec.describe ParagraphParser do
       end
 
       it 'finds the correct sentence including the exclamation mark' do
-        expect(parser.find_sentences[1]).to eq 'Soufflé liquorice pastry pie croissant soufflé jelly!'
+        expect(parser.sentences[1]).to eq 'Soufflé liquorice pastry pie croissant soufflé jelly!'
       end
     end
 
@@ -77,7 +77,7 @@ RSpec.describe ParagraphParser do
       end
 
       it 'finds the correct sentence including the quotes' do
-        expect(parser.find_sentences[1]).to eq '"Soufflé liquorice pastry pie croissant soufflé jelly."'
+        expect(parser.sentences[1]).to eq '"Soufflé liquorice pastry pie croissant soufflé jelly."'
       end
     end
 
@@ -89,13 +89,13 @@ RSpec.describe ParagraphParser do
       end
 
       it 'finds the correct sentences' do
-        expect(parser.find_sentences[0]).to eq 'Cupcake ipsum dolor sit amet!'
-        expect(parser.find_sentences[1]).to eq '"Soufflé liquorice pastry pie croissant soufflé jelly."'
-        expect(parser.find_sentences[2]).to eq 'Halvah croissant gummi bears...'
-        expect(parser.find_sentences[3]).to eq 'Jelly beans cake liquorice apple pie?'
-        expect(parser.find_sentences[4]).to eq 'Lemon drops fruitcake pudding@example.com tootsie roll sesame snaps sweet.'
-        expect(parser.find_sentences[5]).to eq 'Chocolate cake jujubes gummi bears dragée jelly cupcake jelly cookie??'
-        expect(parser.find_sentences[6]).to eq 'Ice cream cupcake donut jelly!!'
+        expect(parser.sentences[0]).to eq 'Cupcake ipsum dolor sit amet!'
+        expect(parser.sentences[1]).to eq '"Soufflé liquorice pastry pie croissant soufflé jelly."'
+        expect(parser.sentences[2]).to eq 'Halvah croissant gummi bears...'
+        expect(parser.sentences[3]).to eq 'Jelly beans cake liquorice apple pie?'
+        expect(parser.sentences[4]).to eq 'Lemon drops fruitcake pudding@example.com tootsie roll sesame snaps sweet.'
+        expect(parser.sentences[5]).to eq 'Chocolate cake jujubes gummi bears dragée jelly cupcake jelly cookie??'
+        expect(parser.sentences[6]).to eq 'Ice cream cupcake donut jelly!!'
       end
     end
   end
